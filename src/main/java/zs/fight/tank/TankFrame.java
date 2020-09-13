@@ -16,9 +16,11 @@ public class TankFrame extends Frame {
 
     Tank mainTank = new Tank(200,200,Dir.DOWN);
     Bullet bullet = new Bullet(300,300,Dir.DOWN);
+    static final int WIDTH = 800;
+    static final int HEIGHT = 600;
 
     public TankFrame(){
-        setSize(800,600);
+        setSize(WIDTH,HEIGHT);
         // 不能改变大小
         setResizable(false);
         setTitle("坦克");
@@ -33,6 +35,28 @@ public class TankFrame extends Frame {
                 System.exit(0);
             }
         });
+    }
+
+    /**
+     * 解决双缓冲的问题
+     * 消除闪烁问题
+     */
+    Image offScreenImage = null;
+
+    @Override
+    public void update(Graphics g){
+
+        if(offScreenImage == null){
+            offScreenImage = this.createImage(WIDTH,HEIGHT);
+        }
+        Graphics graphics = offScreenImage.getGraphics();
+        Color color = graphics.getColor();
+        graphics.setColor(Color.black);
+        graphics.fillRect(0,0,WIDTH,HEIGHT);
+        graphics.setColor(color);
+        paint(graphics);
+        // 把内存的内容复制到显存
+        g.drawImage(offScreenImage,0,0,null);
     }
 
     /**

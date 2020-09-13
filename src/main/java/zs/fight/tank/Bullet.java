@@ -29,10 +29,10 @@ public class Bullet {
     }
 
     public void paint(Graphics g){
-//        Color color = g.getColor();
-//        g.setColor(Color.magenta);
-        g.fillOval(x,y,WIDTH, HEIGHT);
+        Color color = g.getColor();
         g.setColor(Color.magenta);
+        g.fillOval(x,y,WIDTH, HEIGHT);
+        g.setColor(color);
         
         move();
     }

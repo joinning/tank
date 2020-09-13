@@ -17,6 +17,11 @@ public class Tank {
     private Dir dir= Dir.DOWN;
     private final int SPEED = 10;
 
+    /**
+     * 移动为 false
+     */
+    private boolean moving = false;
+
     public Tank() {
     }
 
@@ -28,7 +33,13 @@ public class Tank {
 
     public void print(Graphics g) {
         g.fillRect(x,y,50,50);
+        move();
+    }
 
+    private void move() {
+        if(!moving){
+            return;
+        }
         switch (dir){
             case LEFT:
                 x -= SPEED;

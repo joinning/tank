@@ -16,6 +16,7 @@ public class Tank {
     private int x,y;
     private Dir dir= Dir.DOWN;
     private final int SPEED = 10;
+    private TankFrame tankFrame;
 
     /**
      * 移动为 false
@@ -25,10 +26,11 @@ public class Tank {
     public Tank() {
     }
 
-    public Tank(int x, int y, Dir dir) {
+    public Tank(int x, int y, Dir dir,TankFrame tankFrame) {
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.tankFrame = tankFrame;
     }
 
     public void print(Graphics g) {
@@ -59,5 +61,9 @@ public class Tank {
             default:
                 break;
         }
+    }
+
+    public void fire() {
+        tankFrame.bulletList.add(new Bullet(this.x,this.y,this.dir,this.tankFrame));
     }
 }

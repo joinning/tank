@@ -5,6 +5,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
 /**
  * 类
@@ -14,8 +15,14 @@ import java.awt.event.WindowEvent;
  */
 public class TankFrame extends Frame {
 
-    Tank mainTank = new Tank(200,200,Dir.DOWN);
-    Bullet bullet = new Bullet(300,300,Dir.DOWN);
+    Tank mainTank = new Tank(200,200,Dir.DOWN,this);
+
+    /**
+     * 装子弹的容易
+     * 需要注意的问题，如果不清理的话，很有可能会造成内存泄露
+     */
+    ArrayList<Bullet> bulletList = new ArrayList<>();
+    
     static final int WIDTH = 800;
     static final int HEIGHT = 600;
 
@@ -65,9 +72,14 @@ public class TankFrame extends Frame {
      */
     @Override
     public void paint(Graphics g) {
-        System.out.println("print");
+        Color color = g.getColor();
+        g.setColor(Color.WHITE);
+        g.drawString("子弹的数量" + bulletList.size(),10,60);
+        g.setColor(color);
         mainTank.print(g);
-        bullet.paint(g);
+        for (int i = 0;i < bulletList.size();i++) {
+            bulletList.get(i).paint(g);
+        }
     }
 
     /**
@@ -98,6 +110,9 @@ public class TankFrame extends Frame {
                     break;
                 case KeyEvent.VK_DOWN:
                     bD = true;
+                case KeyEvent.VK_CONTROL:
+                    mainTank.fire();
+                    break;
                     default:
                         break;
             }

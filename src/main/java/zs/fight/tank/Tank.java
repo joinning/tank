@@ -18,6 +18,9 @@ public class Tank {
     private final int SPEED = 10;
     private TankFrame tankFrame;
 
+    private static final int WIDTH = ResourceMgr.tankL.getWidth(),HEIGHT = ResourceMgr.tankL.getHeight();
+
+
     /**
      * 移动为 false
      */
@@ -34,10 +37,21 @@ public class Tank {
     }
 
     public void print(Graphics g) {
-        Color color = g.getColor();
-        g.setColor(Color.YELLOW);
-        g.fillRect(x,y,50,50);
-        g.setColor(color);
+        switch (dir){
+            case LEFT:
+                g.drawImage(ResourceMgr.tankL,x,y,null);
+                break;
+            case UP:
+                g.drawImage(ResourceMgr.tankU,x,y,null);
+                break;
+            case RIGHT:
+                g.drawImage(ResourceMgr.tankR,x,y,null);
+                break;
+            case DOWN:
+                g.drawImage(ResourceMgr.tankD,x,y,null);
+                break;
+                default:break;
+        }
         move();
     }
 
@@ -64,6 +78,9 @@ public class Tank {
     }
 
     public void fire() {
-        tankFrame.bulletList.add(new Bullet(this.x,this.y,this.dir,this.tankFrame));
+        int bX = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
+        int bY = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
+
+        tankFrame.bulletList.add(new Bullet(bX,bY,this.dir,this.tankFrame));
     }
 }

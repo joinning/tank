@@ -18,11 +18,12 @@ public class TankFrame extends Frame {
     Tank mainTank = new Tank(200,400,Dir.DOWN,Group.GOOD,this);
 
     /**
-     * 装子弹的容易
+     * 装子弹的容器
      * 需要注意的问题，如果不清理的话，很有可能会造成内存泄露
      */
     ArrayList<Bullet> bulletList = new ArrayList<>();
     ArrayList<Tank> tankList = new ArrayList<>();
+    Explodes explodes = new Explodes(100,100,this);
     
     static final int WIDTH = 800;
     static final int HEIGHT = 600;
@@ -94,6 +95,8 @@ public class TankFrame extends Frame {
                 bulletList.get(i).collideWith(tankList.get(j));
             }
         }
+
+        explodes.paint(g);
     }
 
     /**

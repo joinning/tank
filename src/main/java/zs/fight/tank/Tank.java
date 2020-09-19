@@ -3,6 +3,7 @@ package zs.fight.tank;
 import lombok.Data;
 
 import java.awt.*;
+import java.util.Random;
 
 /**
  * 坦克
@@ -15,7 +16,7 @@ public class Tank {
 
     private int x,y;
     private Dir dir= Dir.DOWN;
-    private final int SPEED = 10;
+    private final int SPEED = 1;
     private TankFrame tankFrame;
 
     public static final int WIDTH = ResourceMgr.tankL.getWidth(),HEIGHT = ResourceMgr.tankL.getHeight();
@@ -23,20 +24,25 @@ public class Tank {
     /**
      * 移动为 false
      */
-    private boolean moving = false;
+    private boolean moving = true;
 
     /**
      * 坦克是否存活
      */
     private boolean living = true;
 
+    private Random random  = new Random();
+
+    private Group group = Group.BAD;
+
     public Tank() {
     }
 
-    public Tank(int x, int y, Dir dir,TankFrame tankFrame) {
+    public Tank(int x, int y, Dir dir,Group group,TankFrame tankFrame) {
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.group = group;
         this.tankFrame = tankFrame;
     }
 
@@ -82,13 +88,20 @@ public class Tank {
             default:
                 break;
         }
+        if(random.nextInt(10) > 8){
+            this.fire();
+        }
+    }
+
+    private void randomDir() {
+
     }
 
     public void fire() {
         int bX = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
         int bY = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
 
-        tankFrame.bulletList.add(new Bullet(bX,bY,this.dir,this.tankFrame));
+        tankFrame.bulletList.add(new Bullet(bX,bY,this.dir,group,this.tankFrame));
     }
 
     public void die() {

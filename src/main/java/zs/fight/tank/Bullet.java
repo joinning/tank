@@ -19,14 +19,17 @@ public class Bullet {
     public static final int WIDTH = ResourceMgr.bulletL.getWidth(),HEIGHT = ResourceMgr.bulletL.getHeight();
     private boolean living = true;
     private TankFrame tankFrame;
+    private Group group = Group.BAD;
+
 
     public Bullet() {
     }
 
-    public Bullet(int x, int y, Dir dir,TankFrame tankFrame) {
+    public Bullet(int x, int y, Dir dir,Group group,TankFrame tankFrame) {
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.group = group;
         this.tankFrame = tankFrame;
     }
 
@@ -82,6 +85,10 @@ public class Bullet {
      * @param tank
      */
     public void collideWith(Tank tank) {
+
+        if(this.group == tank.getGroup()){
+            return;
+        }
         // 子弹的矩形
         Rectangle rectangle = new Rectangle(this.x,this.y,WIDTH,HEIGHT);
 

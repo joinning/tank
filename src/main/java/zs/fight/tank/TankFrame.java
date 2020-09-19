@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 public class TankFrame extends Frame {
 
-    Tank mainTank = new Tank(200,400,Dir.DOWN,this);
+    Tank mainTank = new Tank(200,400,Dir.DOWN,Group.GOOD,this);
 
     /**
      * 装子弹的容易

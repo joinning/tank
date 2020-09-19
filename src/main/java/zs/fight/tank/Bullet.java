@@ -96,9 +96,12 @@ public class Bullet {
         Rectangle tankRec = new Rectangle(tank.getX(),tank.getY(),tank.WIDTH,tank.HEIGHT);
 
         if(rectangle.intersects(tankRec)){
+            // 将爆炸的特效展示在坦克中间
+            int eX = tank.getX() + Tank.WIDTH/2 - Explode.WIDTH/2;
+            int eY = tank.getY() + Tank.HEIGHT/2 - Explode.HEIGHT/2;
             tank.die();
             this.die();
-            tankFrame.explodes.add(new Explode(x,y,tankFrame));
+            tankFrame.explodes.add(new Explode(eX,eY,tankFrame));
         }
     }
 

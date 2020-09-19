@@ -19,7 +19,7 @@ public class Tank {
     private final int SPEED = 5;
     private TankFrame tankFrame;
 
-    public static final int WIDTH = ResourceMgr.tankL.getWidth(),HEIGHT = ResourceMgr.tankL.getHeight();
+    public static final int WIDTH = ResourceMgr.tankGoodL.getWidth(),HEIGHT = ResourceMgr.tankGoodL.getHeight();
 
     /**
      * 移动为 false
@@ -52,16 +52,16 @@ public class Tank {
         }
         switch (dir){
             case LEFT:
-                g.drawImage(ResourceMgr.tankL,x,y,null);
+                g.drawImage(this.group.equals(Group.GOOD) ? ResourceMgr.tankGoodL : ResourceMgr.tankBadL,x,y,null);
                 break;
             case UP:
-                g.drawImage(ResourceMgr.tankU,x,y,null);
+                g.drawImage(this.group.equals(Group.GOOD) ? ResourceMgr.tankGoodU : ResourceMgr.tankBadU,x,y,null);
                 break;
             case RIGHT:
-                g.drawImage(ResourceMgr.tankR,x,y,null);
+                g.drawImage(this.group.equals(Group.GOOD) ? ResourceMgr.tankGoodR : ResourceMgr.tankBadR,x,y,null);
                 break;
             case DOWN:
-                g.drawImage(ResourceMgr.tankD,x,y,null);
+                g.drawImage(this.group.equals(Group.GOOD) ? ResourceMgr.tankGoodD : ResourceMgr.tankBadD,x,y,null);
                 break;
                 default:break;
         }
@@ -88,9 +88,11 @@ public class Tank {
             default:
                 break;
         }
+        // 随机发射子弹
         if(this.group == Group.BAD && random.nextInt(100) > 95){
             this.fire();
         }
+        // 随机更换方向
         if(this.group == Group.BAD && random.nextInt(100) > 95){
             randomDir();
         }

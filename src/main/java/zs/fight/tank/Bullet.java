@@ -21,6 +21,7 @@ public class Bullet {
     private TankFrame tankFrame;
     private Group group = Group.BAD;
 
+    Rectangle rectangle = new Rectangle();
 
     public Bullet() {
     }
@@ -31,6 +32,11 @@ public class Bullet {
         this.dir = dir;
         this.group = group;
         this.tankFrame = tankFrame;
+
+        rectangle.x = this.x;
+        rectangle.y = this.y;
+        rectangle.width = WIDTH;
+        rectangle.height = HEIGHT;
     }
 
     public void paint(Graphics g){
@@ -75,13 +81,17 @@ public class Bullet {
             default:
                 break;
         }
+        // 更新 rect 的值
+        rectangle.x = this.x;
+        rectangle.y = this.y;
+
         if(x < 0 || y < 0 || x > TankFrame.WIDTH || y > TankFrame.HEIGHT){
             living = false;
         }
     }
 
     /**
-     * 碰撞后销毁
+     * 碰撞检测，碰撞后销毁
      * @param tank
      */
     public void collideWith(Tank tank) {
@@ -89,13 +99,13 @@ public class Bullet {
         if(this.group == tank.getGroup()){
             return;
         }
-        // 子弹的矩形
-        Rectangle rectangle = new Rectangle(this.x,this.y,WIDTH,HEIGHT);
+//        // 子弹的矩形
+//        Rectangle rectangle = new Rectangle(this.x,this.y,WIDTH,HEIGHT);
 
-        // 坦克的矩形
-        Rectangle tankRec = new Rectangle(tank.getX(),tank.getY(),tank.WIDTH,tank.HEIGHT);
+//        // 坦克的矩形
+//        Rectangle tankRec = new Rectangle(tank.getX(),tank.getY(),tank.WIDTH,tank.HEIGHT);
 
-        if(rectangle.intersects(tankRec)){
+        if(rectangle.intersects(tank.rectangle)){
             // 将爆炸的特效展示在坦克中间
             int eX = tank.getX() + Tank.WIDTH/2 - Explode.WIDTH/2;
             int eY = tank.getY() + Tank.HEIGHT/2 - Explode.HEIGHT/2;

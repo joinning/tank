@@ -34,6 +34,8 @@ public class Tank {
     private Random random  = new Random();
 
     private Group group = Group.BAD;
+    Rectangle rectangle = new Rectangle();
+
 
     public Tank() {
     }
@@ -44,6 +46,11 @@ public class Tank {
         this.dir = dir;
         this.group = group;
         this.tankFrame = tankFrame;
+
+        rectangle.x = this.x;
+        rectangle.y = this.y;
+        rectangle.width = WIDTH;
+        rectangle.height = HEIGHT;
     }
 
     public void paint(Graphics g) {
@@ -88,6 +95,8 @@ public class Tank {
             default:
                 break;
         }
+
+
         // 随机发射子弹
         if(this.group == Group.BAD && random.nextInt(100) > 95){
             this.fire();
@@ -95,6 +104,28 @@ public class Tank {
         // 随机更换方向
         if(this.group == Group.BAD && random.nextInt(100) > 95){
             randomDir();
+        }
+        
+        boundsCheck();
+
+        // 更新 rect 的值
+        rectangle.x = this.x;
+        rectangle.y = this.y;
+    }
+
+    // 边界检测
+    private void boundsCheck() {
+        if(this.x < 0){
+            x = 0;
+        }
+        if(this.y < 0){
+            y = 0;
+        }
+        if(this.x > TankFrame.WIDTH - WIDTH){
+            x = TankFrame.WIDTH - WIDTH;
+        }
+        if(this.y > TankFrame.HEIGHT - HEIGHT){
+            y = TankFrame.HEIGHT - HEIGHT;
         }
     }
 

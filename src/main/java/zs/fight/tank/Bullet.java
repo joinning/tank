@@ -17,7 +17,7 @@ public class Bullet {
     private Dir dir;
     private static final int SPEED = 10;
     public static final int WIDTH = ResourceMgr.bulletL.getWidth(),HEIGHT = ResourceMgr.bulletL.getHeight();
-    private boolean live = true;
+    private boolean living = true;
     private TankFrame tankFrame;
 
     public Bullet() {
@@ -31,7 +31,7 @@ public class Bullet {
     }
 
     public void paint(Graphics g){
-        if(!live){
+        if(!living){
             tankFrame.bulletList.remove(this);
         }
 
@@ -73,7 +73,28 @@ public class Bullet {
                 break;
         }
         if(x < 0 || y < 0 || x > TankFrame.WIDTH || y > TankFrame.HEIGHT){
-            live = false;
+            living = false;
         }
+    }
+
+    /**
+     * 碰撞后销毁
+     * @param tank
+     */
+    public void collideWith(Tank tank) {
+        // 子弹的矩形
+        Rectangle rectangle = new Rectangle(this.x,this.y,WIDTH,HEIGHT);
+
+        // 坦克的矩形
+        Rectangle tankRec = new Rectangle(tank.getX(),tank.getY(),tank.WIDTH,tank.HEIGHT);
+
+        if(rectangle.intersects(tankRec)){
+            tank.die();
+            this.die();
+        }
+    }
+
+    private void die() {
+        this.living = false;
     }
 }

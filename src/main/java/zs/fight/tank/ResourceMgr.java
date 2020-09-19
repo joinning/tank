@@ -23,15 +23,15 @@ public class ResourceMgr {
 
     static {
         try {
-            tankGoodL = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankL.gif"));
-            tankGoodU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankU.gif"));
-            tankGoodR = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankR.gif"));
-            tankGoodD = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/tankD.gif"));
+            tankGoodU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/GoodTank1.png"));
+            tankGoodL = ImageUtil.rotateImage(tankGoodU,-90);
+            tankGoodR = ImageUtil.rotateImage(tankGoodU,90);
+            tankGoodD = ImageUtil.rotateImage(tankGoodU,180);
 
-            tankBadL = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/BadTank1.png"));
-            tankBadU = ImageUtil.rotateImage(tankBadL,90);
-            tankBadR = ImageUtil.rotateImage(tankBadL,180);
-            tankBadD = ImageUtil.rotateImage(tankBadL,270);
+            tankBadU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/BadTank1.png"));
+            tankBadL = ImageUtil.rotateImage(tankBadU,-90);
+            tankBadR = ImageUtil.rotateImage(tankBadU,90);
+            tankBadD = ImageUtil.rotateImage(tankBadU,180);
 
             bulletL = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletL.gif"));
             bulletU = ImageIO.read(ResourceMgr.class.getClassLoader().getResourceAsStream("images/bulletU.gif"));

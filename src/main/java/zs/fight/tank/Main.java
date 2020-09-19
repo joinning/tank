@@ -15,8 +15,10 @@ public class Main {
 
         TankFrame tankFrame = new TankFrame();
 
+        int initTankCount= Integer.parseInt(PropertyMgr.get("initTankCount").toString());
+
         // 初始敌方坦克
-        for(int i =0;i < 5;i++){
+        for(int i =0;i < initTankCount;i++){
             tankFrame.tankList.add(new Tank(50 + i * 80,200,Dir.DOWN,Group.BAD,tankFrame));
         }
 

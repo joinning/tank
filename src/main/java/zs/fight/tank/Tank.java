@@ -16,7 +16,7 @@ public class Tank {
 
     private int x,y;
     private Dir dir= Dir.DOWN;
-    private final int SPEED = 1;
+    private final int SPEED = 5;
     private TankFrame tankFrame;
 
     public static final int WIDTH = ResourceMgr.tankL.getWidth(),HEIGHT = ResourceMgr.tankL.getHeight();
@@ -88,12 +88,20 @@ public class Tank {
             default:
                 break;
         }
-        if(random.nextInt(10) > 8){
+        if(this.group == Group.BAD && random.nextInt(100) > 95){
             this.fire();
+        }
+        if(this.group == Group.BAD && random.nextInt(100) > 95){
+            randomDir();
         }
     }
 
+    // 在移动的时候随机更换方向
     private void randomDir() {
+        if(group.equals(Group.GOOD)){
+            return;
+        }
+        this.dir = Dir.values()[random.nextInt(4)];
 
     }
 

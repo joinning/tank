@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 类
@@ -23,7 +24,8 @@ public class TankFrame extends Frame {
      */
     ArrayList<Bullet> bulletList = new ArrayList<>();
     ArrayList<Tank> tankList = new ArrayList<>();
-    Explodes explodes = new Explodes(100,100,this);
+//    Explodes explodes = new Explodes(100,100,this);
+    List<Explode> explodes = new ArrayList<Explode>();
     
     static final int WIDTH = 800;
     static final int HEIGHT = 600;
@@ -78,6 +80,8 @@ public class TankFrame extends Frame {
         g.setColor(Color.WHITE);
         g.drawString("子弹的数量" + bulletList.size(),10,60);
         g.drawString("敌人的数量" + tankList.size(),10,80);
+        g.drawString("爆炸的数量" + explodes.size(),10,100);
+
         g.setColor(color);
         mainTank.paint(g);
         for (int i = 0;i < bulletList.size();i++) {
@@ -88,6 +92,11 @@ public class TankFrame extends Frame {
             tankList.get(i).paint(g);
         }
 
+        for(int i = 0;i < explodes.size();i ++){
+
+            explodes.get(i).paint(g);
+        }
+        // 碰撞检测
         for(int i = 0;i < bulletList.size();i ++){
 
             for(int j = 0 ;j < tankList.size(); j++){
@@ -96,7 +105,6 @@ public class TankFrame extends Frame {
             }
         }
 
-        explodes.paint(g);
     }
 
     /**

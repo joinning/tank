@@ -36,7 +36,7 @@ public class Tank {
         this.tankFrame = tankFrame;
     }
 
-    public void print(Graphics g) {
+    public void paint(Graphics g) {
         switch (dir){
             case LEFT:
                 g.drawImage(ResourceMgr.tankL,x,y,null);

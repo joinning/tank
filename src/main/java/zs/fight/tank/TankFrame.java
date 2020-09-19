@@ -15,13 +15,14 @@ import java.util.ArrayList;
  */
 public class TankFrame extends Frame {
 
-    Tank mainTank = new Tank(200,200,Dir.DOWN,this);
+    Tank mainTank = new Tank(200,400,Dir.DOWN,this);
 
     /**
      * 装子弹的容易
      * 需要注意的问题，如果不清理的话，很有可能会造成内存泄露
      */
     ArrayList<Bullet> bulletList = new ArrayList<>();
+    ArrayList<Tank> tankList = new ArrayList<>();
     
     static final int WIDTH = 800;
     static final int HEIGHT = 600;
@@ -76,9 +77,13 @@ public class TankFrame extends Frame {
         g.setColor(Color.WHITE);
         g.drawString("子弹的数量" + bulletList.size(),10,60);
         g.setColor(color);
-        mainTank.print(g);
+        mainTank.paint(g);
         for (int i = 0;i < bulletList.size();i++) {
             bulletList.get(i).paint(g);
+        }
+
+        for (int i = 0;i < tankList.size();i++) {
+            tankList.get(i).paint(g);
         }
     }
 

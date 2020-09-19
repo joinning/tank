@@ -15,6 +15,11 @@ public class Main {
 
         TankFrame tankFrame = new TankFrame();
 
+        // 初始敌方坦克
+        for(int i =0;i < 5;i++){
+            tankFrame.tankList.add(new Tank(50 + i * 80,200,Dir.DOWN,tankFrame));
+        }
+
         /**
          * 每隔 50 毫秒刷新 paint，实现移动
          */
